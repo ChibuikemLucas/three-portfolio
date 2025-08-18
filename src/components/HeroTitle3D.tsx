@@ -10,6 +10,8 @@ import {
     Environment,
 } from "@react-three/drei";
 import * as THREE from "three";
+import ProjectCard3D from "./ProjectCard3D";
+import { projects } from "@/lib/projects"; // <-- make sure this path matches your setup
 
 function FloatingName() {
     const group = useRef<THREE.Group>(null);
@@ -26,7 +28,7 @@ function FloatingName() {
                     outlineWidth={0.01}
                     outlineColor="#000"
                 >
-                    Chibuikem
+                    CHIBUIKEM LUCAS
                     <meshStandardMaterial metalness={0.2} roughness={0.25} />
                 </Text>
 
@@ -73,11 +75,22 @@ function Scene() {
                 shadow-mapSize-height={1024}
             />
 
+            {/* Floating name */}
             <FloatingName />
+
+            {/* Project cards spread out horizontally */}
+            {projects.map((p, i) => (
+                <ProjectCard3D
+                    key={p.id}
+                    project={p}
+                    position={[i * 3 - projects.length, -2, 0]} // lower Y so they're below your name
+                    onOpen={(url) => window.open(url, "_blank")}
+                />
+            ))}
 
             {/* nice IBL */}
             <Environment preset="city" />
-            {/* lock panning, keep a little orbit for fun (can disable) */}
+            {/* lock panning, keep a little orbit for fun */}
             <OrbitControls enablePan={false} minDistance={3.5} maxDistance={8} />
         </>
     );
@@ -85,11 +98,12 @@ function Scene() {
 
 export default function HeroTitle3D() {
     return (
-        <div className="relative w-full h-[65vh] md:h-[75vh]">
+        <div className="fixed inset-0 w-full h-full min-h-screen z-0">
             <Canvas
                 shadows
                 dpr={[1, 2]}
                 camera={{ position: [0, 0, 6], fov: 45 }}
+                style={{ width: '100vw', height: '100vh', position: 'absolute', inset: 0 }}
             >
                 <Scene />
             </Canvas>

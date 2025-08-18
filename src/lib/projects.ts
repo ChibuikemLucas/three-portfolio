@@ -3,9 +3,9 @@ export type Project = {
     title: string;
     description: string;
     tags: string[];
-    image: string;        // thumbnail or cover
-    href: string;         // live url
-    repo: string;         // github
+    image: string;  // cover thumbnail path (from /public/covers/)
+    href: string;   // live demo URL
+    repo: string;   // GitHub repo URL
 };
 
 export const projects: Project[] = [
@@ -16,16 +16,17 @@ export const projects: Project[] = [
         tags: ["Next.js", "Tailwind", "TypeScript", "API"],
         image: "/covers/crypto-tracker.png",
         href: "https://crypto-tracker-kby7.vercel.app/",
-        repo: "https://github.com/ChibuikemLucas/crypto-tracker"
+        repo: "https://github.com/ChibuikemLucas/crypto-tracker",
     },
     {
-        title: "Interactive Resume",
         id: "interactive-resume",
-        description: "A live animated, interactive resume built with HTML, CSS, JavaScript, and GSAP. It switches between tabs with smooth and unique animations, giving a quick summary of my developer experience for recruiters, future collaborators and other viewers before I have my 3D portfolio website ready.",
+        title: "Interactive Resume",
+        description:
+            "A live animated, interactive resume built with HTML, CSS, JavaScript, and GSAP. It switches between tabs with smooth and unique animations, giving a quick summary of my developer experience for recruiters, future collaborators and other viewers before I have my 3D portfolio website ready.",
         tags: ["JavaScript ES6", "HTML5", "CSS3"],
         image: "/covers/interactive-resume.png",
+        href: "https://interactive-resume-bice.vercel.app/",
         repo: "https://github.com/ChibuikemLucas/interactive-resume",
-        href: "https://interactive-resume-bice.vercel.app/"
-    }
-    // add more here…
+    },
+    // 🚀 Add more projects below in the same format
 ];
