@@ -97,28 +97,5 @@ function Scene() {
 }
 
 export default function HeroTitle3D() {
-    return (
-        <div className="fixed inset-0 w-full h-full min-h-screen z-0">
-            <Canvas
-                shadows
-                dpr={[1, 2]}
-                camera={{ position: [0, 0, 6], fov: 45 }}
-                style={{ width: '100vw', height: '100vh', position: 'absolute', inset: 0 }}
-            >
-                <Scene />
-            </Canvas>
-
-            {/* Top overlay copy (SEO/accessible) */}
-            <div className="pointer-events-none absolute inset-0 flex items-start justify-center">
-                <div className="mt-6 text-center">
-                    <p className="text-sm text-zinc-400">
-                        Explore my work in a fully interactive 3D space
-                    </p>
-                </div>
-            </div>
-
-            {/* gradient fade to content below */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-black" />
-        </div>
-    );
+    return <Scene />;
 }
