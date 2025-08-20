@@ -8,8 +8,9 @@ import * as THREE from "three";
 export default function BlogPanel3D() {
     const ref = useRef<THREE.Group>(null!);
 
-    useFrame(() => {
-        ref.current.rotation.y += 0.002; // slow spin
+    useFrame((state) => {
+        const t = state.clock.getElapsedTime();
+        ref.current.rotation.y = Math.sin(t * 0.2) * 0.1; // gentle oscillation
     });
 
     return (
