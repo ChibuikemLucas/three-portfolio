@@ -45,7 +45,7 @@ function FloatingName() {
                 </Text>
             </Float>
 
-            {/* Subtle accents */}
+            {/* Subtle accents 
             <mesh position={[-1.8, -1.1, 0]}>
                 <torusGeometry args={[0.22, 0.06, 16, 64]} />
                 <meshStandardMaterial roughness={0.3} metalness={0.8} />
@@ -53,7 +53,7 @@ function FloatingName() {
             <mesh position={[2, 0.9, -0.3]} rotation={[0.6, 0.2, 0.8]}>
                 <icosahedronGeometry args={[0.22, 1]} />
                 <meshStandardMaterial roughness={0.3} metalness={0.8} />
-            </mesh>
+            </mesh>*/}
         </group>
     );
 }
@@ -96,6 +96,11 @@ function Scene() {
     );
 }
 
-export default function HeroTitle3D() {
-    return <Scene />;
+type HeroTitle3DProps = {
+    position?: [number, number, number];
+};
+
+export default function HeroTitle3D({ position = [0, 0, 0] }: HeroTitle3DProps) {
+    return <group position={position}><Scene /></group>;
 }
+

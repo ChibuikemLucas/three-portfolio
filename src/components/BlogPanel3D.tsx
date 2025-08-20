@@ -5,15 +5,20 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-export default function BlogPanel3D() {
+type BlogPanel3DProps = {
+    position?: [number, number, number];
+};
+
+export default function BlogPanel3D({ position = [0, -3, 0] }: BlogPanel3DProps) {
     const ref = useRef<THREE.Group>(null!);
 
-    useFrame(() => {
-        ref.current.rotation.y += 0.002; // slow spin
+    useFrame((state) => {
+        const t = state.clock.getElapsedTime();
+        ref.current.rotation.y = Math.sin(t * 0.2) * 0.1; // gentle oscillation
     });
 
     return (
-        <group ref={ref} position={[0, -3, 0]}>
+        <group ref={ref} position={position}>
             <mesh>
                 <planeGeometry args={[4, 2]} />
                 <meshStandardMaterial
