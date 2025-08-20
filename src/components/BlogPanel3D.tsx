@@ -5,7 +5,11 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-export default function BlogPanel3D() {
+type BlogPanel3DProps = {
+    position?: [number, number, number];
+};
+
+export default function BlogPanel3D({ position = [0, -3, 0] }: BlogPanel3DProps) {
     const ref = useRef<THREE.Group>(null!);
 
     useFrame((state) => {
@@ -14,7 +18,7 @@ export default function BlogPanel3D() {
     });
 
     return (
-        <group ref={ref} position={[0, -3, 0]}>
+        <group ref={ref} position={position}>
             <mesh>
                 <planeGeometry args={[4, 2]} />
                 <meshStandardMaterial
