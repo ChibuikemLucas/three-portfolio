@@ -1,9 +1,8 @@
 "use client";
 
 import { Text } from "@react-three/drei";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
 import * as THREE from "three";
 
 type Props = {
@@ -16,14 +15,33 @@ export default function SocialPanel3D({ label, url, position }: Props) {
     const ref = useRef<THREE.Group>(null!);
     const [hovered, setHovered] = useState(false);
 
-    // Animate scale on hover
-    useFrame(() => {
+    const baseY = position[1]; // remember original Y so bobbing works
+
+    useFrame(({ clock }) => {
+        if (!ref.current) return;
+
+        // Scale on hover
         ref.current.scale.lerp(
             new THREE.Vector3(
                 hovered ? 1.2 : 1,
                 hovered ? 1.2 : 1,
                 hovered ? 1.2 : 1
             ),
+            0.1
+        );
+
+        // Subtle floating (bobbing) animation
+        ref.current.position.y = baseY + Math.sin(clock.elapsedTime * 2) * 0.05;
+
+        // Slight tilt on hover
+        ref.current.rotation.x = THREE.MathUtils.lerp(
+            ref.current.rotation.x,
+            hovered ? 0.15 : 0,
+            0.1
+        );
+        ref.current.rotation.y = THREE.MathUtils.lerp(
+            ref.current.rotation.y,
+            hovered ? -0.15 : 0,
             0.1
         );
     });
