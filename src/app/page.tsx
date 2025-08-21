@@ -3,12 +3,13 @@
 
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
-
+import ProjectCard3D from "@/components/ProjectCard3D";
 import HeroTitle3D from "@/components/HeroTitle3D";
 import SocialPanel3D from "@/components/SocialPanel3D";
 import TechChip3D from "@/components/TechChip3D";
 import BlogPanel3D from "@/components/BlogPanel3D";
 import Footer3D from "@/components/Footer3D";
+import { projects } from "@/lib/projects"; // 
 
 export default function HomePage() {
   return (
@@ -53,6 +54,17 @@ export default function HomePage() {
           url="/resume.pdf"
           position={[3, 0, 0]}
         />
+
+        {/* Projects (shifted below social links) */}
+        {/* Project cards spread out horizontally */}
+        {projects.map((p, i) => (
+          <ProjectCard3D
+            key={p.id}
+            project={p}
+            position={[i * 3 - projects.length, -2, 0]} // lower Y so they're below your name
+            onOpen={(url) => window.open(url, "_blank")}
+          />
+        ))}
 
         {/* Tech Stack (orbiting chips around hero, slightly deeper in z) */}
         <TechChip3D label="Next.js" radius={5} speed={0.3} index={0} />
