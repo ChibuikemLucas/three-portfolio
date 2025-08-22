@@ -9,6 +9,7 @@
     "postinstall": "patch -p0 < patches.txt || true"
   },
   "dependencies": {
+    "@react-spring/three": "^10.0.1",
     "@react-three/drei": "9.79.1",
     "@react-three/fiber": "8.15.16",
     "@types/three": "^0.179.0",
