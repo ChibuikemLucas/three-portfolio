@@ -1,83 +1,87 @@
-
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Stars } from "@react-three/drei";
-import ProjectCard3D from "@/components/ProjectCard3D";
+import { OrbitControls, Environment } from "@react-three/drei";
 import HeroTitle3D from "@/components/HeroTitle3D";
 import SocialPanel3D from "@/components/SocialPanel3D";
-import TechChip3D from "@/components/TechChip3D";
 import BlogPanel3D from "@/components/BlogPanel3D";
 import Footer3D from "@/components/Footer3D";
-import { projects } from "@/lib/projects"; // 
+import Laptop3D from "@/components/Laptop3D";
+import Desk3D from "@/components/Desk3D";
 
 export default function HomePage() {
   return (
-    <>
-      <Canvas
-        camera={{ position: [0, 0, 12], fov: 50 }}
-        style={{
-          position: "fixed",
-          inset: 0,
-          width: "100vw",
-          height: "100vh",
-          zIndex: 0,
-        }}
-      >
-        {/* Space background */}
-        <color attach="background" args={["#050508"]} />
-        <Stars radius={80} depth={40} count={800} factor={3} fade />
+    <Canvas
+      camera={{ position: [0, 2, 8], fov: 45 }}
+      shadows
+      style={{
+        position: "fixed",
+        inset: 0,
+        width: "100vw",
+        height: "100vh",
+        zIndex: 0,
+      }}
+    >
+      {/* Background lighting */}
+      <ambientLight intensity={0.6} />
+      <directionalLight position={[3, 5, 2]} intensity={1.2} castShadow />
 
-        {/* Lights */}
-        <ambientLight intensity={0.6} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
+      {/* 🏠 Room */}
+      {/* Floor */}
+      <mesh rotation-x={-Math.PI / 2} position={[0, -2, 0]} receiveShadow>
+        <planeGeometry args={[20, 20]} />
+        <meshStandardMaterial color="#d9c9b6" roughness={0.8} />
+      </mesh>
 
-        {/* Controls */}
-        <OrbitControls enableZoom={false} />
+      {/* Back wall */}
+      <mesh position={[0, 3, -5]} receiveShadow>
+        <planeGeometry args={[20, 10]} />
+        <meshStandardMaterial color="#f5f0e6" />
+      </mesh>
 
-        {/* Hero Title (center top) */}
-        <HeroTitle3D position={[0, 2, 0]} />
+      {/* Left wall */}
+      <mesh rotation-y={Math.PI / 2} position={[-10, 3, 0]} receiveShadow>
+        <planeGeometry args={[20, 10]} />
+        <meshStandardMaterial color="#f5f0e6" />
+      </mesh>
 
-        {/* Social Links (spaced below hero) */}
-        <SocialPanel3D
-          label="GitHub"
-          url="https://github.com/ChibuikemLucas"
-          position={[-3, 0, 0]}
-        />
-        <SocialPanel3D
-          label="LinkedIn"
-          url="https://linkedin.com/in/chibuikem"
-          position={[0, 0, 0]}
-        />
-        <SocialPanel3D
-          label="Resume"
-          url="/resume.pdf"
-          position={[3, 0, 0]}
-        />
+      {/* Desk with drawers */}
+      <Desk3D position={[0, -1.5, 0]} />
 
-        {/* Projects (shifted below social links) */}
-        {/* Project cards spread out horizontally */}
-        {projects.map((p, i) => (
-          <ProjectCard3D
-            key={p.id}
-            project={p}
-            position={[i * 3 - projects.length, -2, 0]} // lower Y so they're below your name
-            onOpen={(url) => window.open(url, "_blank")}
-          />
-        ))}
+      {/* Laptop on desk */}
+      <Laptop3D position={[0, -0.5, 0]} />
 
-        {/* Tech Stack (orbiting chips around hero, slightly deeper in z) */}
-        <TechChip3D label="Next.js" radius={5} speed={0.3} index={0} />
-        <TechChip3D label="Tailwind" radius={5} speed={0.3} index={1} />
-        <TechChip3D label="TypeScript" radius={5} speed={0.3} index={2} />
-        <TechChip3D label="Three.js" radius={5} speed={0.3} index={3} />
+      {/* Hero Title above laptop */}
+      <HeroTitle3D position={[0, 1.5, 0]} />
 
-        {/* Blog (further down the scene) */}
-        <BlogPanel3D position={[0, -3.5, 0]} />
+      {/* Social panels in front of laptop */}
+      <SocialPanel3D
+        label="GitHub"
+        url="https://github.com/ChibuikemLucas"
+        position={[-2, -0.3, 1]}
+      />
+      <SocialPanel3D
+        label="LinkedIn"
+        url="https://linkedin.com/in/chibuikem"
+        position={[0, -0.3, 1]}
+      />
+      <SocialPanel3D
+        label="Resume"
+        url="/resume.pdf"
+        position={[2, -0.3, 1]}
+      />
 
-        {/* Footer (bottom, pushed back slightly) */}
-        <Footer3D position={[0, -5, -1]} />
-      </Canvas>
-    </>
+      {/* Blog panel beside desk */}
+      <BlogPanel3D position={[3.5, -1.5, 0]} />
+
+      {/* Footer engraved into desk */}
+      <Footer3D position={[0, -1.8, 0.8]} rotation={[-Math.PI / 2, 0, 0]} />
+
+      {/* Environment */}
+      <Environment preset="apartment" />
+
+      {/* Camera controls */}
+      <OrbitControls enablePan={false} minDistance={4} maxDistance={10} />
+    </Canvas>
   );
 }
