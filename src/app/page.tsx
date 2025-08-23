@@ -2,17 +2,34 @@
 
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
+import { useEffect, useState } from "react";
+
 import HeroTitle3D from "@/components/HeroTitle3D";
 import SocialPanel3D from "@/components/SocialPanel3D";
 import BlogPanel3D from "@/components/BlogPanel3D";
 import Footer3D from "@/components/Footer3D";
 import Laptop3D from "@/components/Laptop3D";
 import Desk3D from "@/components/Desk3D";
+import WallFrame3D from "@/components/WallFrame3D";
 
 export default function HomePage() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Tailwind's md breakpoint
+    };
+    handleResize(); // run once on load
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <Canvas
-      camera={{ position: [0, 2, 8], fov: 45 }}
+      camera={{
+        position: isMobile ? [0, 2, 11] : [0, 2, 8], // pull back on mobile
+        fov: isMobile ? 55 : 45, // wider view for small screens
+      }}
       shadows
       style={{
         position: "fixed",
@@ -22,11 +39,18 @@ export default function HomePage() {
         zIndex: 0,
       }}
     >
-      {/* Background lighting */}
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[3, 5, 2]} intensity={1.2} castShadow />
+      {/* Tech stack wallpaper (left wall) */}
+      <WallFrame3D
+        position={isMobile ? [-5.5, 1, -4.9] : [-7, 1, -4.9]}
+        text={`Tech Stack\n- Next.js\n- TypeScript\n- Tailwind\n- Three.js\n- Redux\n- Node.js\n- Express\n- MongoDB`}
+      />
 
-      {/* 🏠 Room */}
+      {/* Profile picture wallpaper (right wall) */}
+      <WallFrame3D
+        position={isMobile ? [5.5, 1, -4.9] : [7, 1, -4.9]}
+        imageUrl="/me.jpg"
+      />
+
       {/* Floor */}
       <mesh rotation-x={-Math.PI / 2} position={[0, -2, 0]} receiveShadow>
         <planeGeometry args={[20, 20]} />
@@ -45,20 +69,20 @@ export default function HomePage() {
         <meshStandardMaterial color="#f5f0e6" />
       </mesh>
 
-      {/* Desk with drawers */}
+      {/* Desk */}
       <Desk3D position={[0, -1.5, 0]} />
 
-      {/* Laptop on desk */}
+      {/* Laptop */}
       <Laptop3D position={[0, -0.5, 0]} />
 
-      {/* Hero Title above laptop */}
+      {/* Hero Title */}
       <HeroTitle3D position={[0, 1.5, 0]} />
 
-      {/* Social panels in front of laptop */}
+      {/* Social panels */}
       <SocialPanel3D
         label="GitHub"
         url="https://github.com/ChibuikemLucas"
-        position={[-2, -0.3, 1]}
+        position={isMobile ? [-1.2, -0.3, 1] : [-2, -0.3, 1]}
       />
       <SocialPanel3D
         label="LinkedIn"
@@ -67,21 +91,25 @@ export default function HomePage() {
       />
       <SocialPanel3D
         label="Resume"
-        url="/resume.pdf"
-        position={[2, -0.3, 1]}
+        url="/resume.docx"
+        position={isMobile ? [1.2, -0.3, 1] : [2, -0.3, 1]}
       />
 
-      {/* Blog panel beside desk */}
-      <BlogPanel3D position={[3.5, -1.5, 0]} />
+      {/* Blog panel */}
+      <BlogPanel3D
+        position={isMobile ? [2, -1.5, 0] : [2.7, -1.5, 0]}
+        title="The Developer Experience Blog"
+        url="https://the-developer-experience.hashnode.dev"
+      />
 
-      {/* Footer engraved into desk */}
+      {/* Footer */}
       <Footer3D position={[0, -1.8, 0.8]} rotation={[-Math.PI / 2, 0, 0]} />
 
       {/* Environment */}
       <Environment preset="apartment" />
 
-      {/* Camera controls */}
-      <OrbitControls enablePan={false} minDistance={4} maxDistance={10} />
+      {/* Controls */}
+      <OrbitControls enablePan={false} minDistance={4} maxDistance={isMobile ? 12 : 10} />
     </Canvas>
   );
 }

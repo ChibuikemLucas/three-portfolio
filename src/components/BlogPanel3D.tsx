@@ -1,36 +1,41 @@
 "use client";
 
 import { Text } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
-import * as THREE from "three";
 
 type BlogPanel3DProps = {
-    position?: [number, number, number];
+    position: [number, number, number];
+    title: string;
+    url: string;
 };
 
-export default function BlogPanel3D({ position = [0, -3, 0] }: BlogPanel3DProps) {
-    const ref = useRef<THREE.Group>(null!);
-
-    useFrame((state) => {
-        const t = state.clock.getElapsedTime();
-        ref.current.rotation.y = Math.sin(t * 0.2) * 0.1; // gentle oscillation
-    });
-
+export default function BlogPanel3D({ position, title, url }: BlogPanel3DProps) {
     return (
-        <group ref={ref} position={position}>
+        <group position={position}>
+            {/* Panel background */}
             <mesh>
-                <planeGeometry args={[4, 2]} />
-                <meshStandardMaterial
-                    color="#1e40af"
-                    transparent
-                    opacity={0.5}
-                    emissive="#3b82f6"
-                />
+                <planeGeometry args={[2.5, 1.2]} />
+                <meshStandardMaterial color="#1e293b" />
             </mesh>
-            <Text position={[0, 0, 0.1]} fontSize={0.25} anchorX="center">
-                Blog / Updates Coming Soon...
+
+            {/* Blog text */}
+            <Text
+                position={[0, 0, 0.05]}
+                fontSize={0.18}
+                color="#ffffff"
+                anchorX="center"
+                anchorY="middle"
+            >
+                {title}
             </Text>
+
+            {/* Click handler */}
+            <mesh
+                position={[0, 0, 0.1]}
+                onClick={() => window.open(url, "_blank")}
+            >
+                <planeGeometry args={[2.5, 1.2]} />
+                <meshBasicMaterial transparent opacity={0} />
+            </mesh>
         </group>
     );
 }
