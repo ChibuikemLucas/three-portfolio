@@ -70,10 +70,10 @@ export default function HomePage() {
       </mesh>
 
       {/* Desk */}
-      <Desk3D position={[0, -1.5, 0]} />
+      <Desk3D position={[0, -2, 0]} />
 
       {/* Laptop */}
-      <Laptop3D position={[0, -0.5, 0]} />
+      <Laptop3D position={[0, -1, 0]} />
 
       {/* Hero Title */}
       <HeroTitle3D position={[0, 1.5, 0]} />
@@ -103,7 +103,7 @@ export default function HomePage() {
       />
 
       {/* Footer */}
-      <Footer3D position={[0, -1.8, 0.8]} rotation={[-Math.PI / 2, 0, 0]} />
+      <Footer3D position={[0, -1.99, 0.8]} rotation={[-Math.PI / 2, 0, 0]} />
 
       {/* Environment */}
       <Environment preset="apartment" />
