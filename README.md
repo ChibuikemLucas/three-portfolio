@@ -39,7 +39,7 @@ My blog:
 Clone and run locally:  
 
 ```bash
-git clone https://github.com/your-username/three-portfolio.git
+git clone https://github.com/ChibuikemLucas/three-portfolio.git
 cd three-portfolio
 pnpm install
 pnpm dev
