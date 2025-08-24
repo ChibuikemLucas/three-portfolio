@@ -1,6 +1,7 @@
 "use client";
 
 import { Text } from "@react-three/drei";
+import { useLoader } from "@react-three/fiber";
 import * as THREE from "three";
 
 type WallFrame3DProps = {
@@ -10,6 +11,9 @@ type WallFrame3DProps = {
 };
 
 export default function WallFrame3D({ position, imageUrl, text }: WallFrame3DProps) {
+    // Load texture only if imageUrl exists
+    const texture = imageUrl ? useLoader(THREE.TextureLoader, imageUrl) : null;
+
     return (
         <group position={position}>
             {/* Frame */}
@@ -21,8 +25,8 @@ export default function WallFrame3D({ position, imageUrl, text }: WallFrame3DPro
             {/* Inner content */}
             <mesh position={[0, 0, 0.06]}>
                 <planeGeometry args={[3, 2]} />
-                {imageUrl ? (
-                    <meshStandardMaterial map={new THREE.TextureLoader().load(imageUrl)} />
+                {texture ? (
+                    <meshStandardMaterial map={texture} />
                 ) : (
                     <meshStandardMaterial color="#ffffff" />
                 )}
