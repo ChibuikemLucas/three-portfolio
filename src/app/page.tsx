@@ -24,11 +24,14 @@ export default function HomePage() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Adjust room width dynamically (narrower on mobile)
+  const roomWidth = isMobile ? 12 : 20;
+
   return (
     <Canvas
       camera={{
-        position: isMobile ? [0, 2, 11] : [0, 2, 8], // pull back on mobile
-        fov: isMobile ? 55 : 45, // wider view for small screens
+        position: isMobile ? [0, 2, 11] : [0, 2, 8], // pull back more on mobile
+        fov: isMobile ? 55 : 45,
       }}
       shadows
       style={{
@@ -39,32 +42,45 @@ export default function HomePage() {
         zIndex: 0,
       }}
     >
-      {/* Tech stack wallpaper (left wall) */}
+      {/* Tech stack wallpaper */}
       <WallFrame3D
-        position={isMobile ? [-5.5, 1, -4.9] : [-7, 1, -4.9]}
+        position={isMobile ? [-roomWidth / 2 + 1.5, 1, -4.9] : [-7, 1, -4.9]}
         text={`Tech Stack\n- Next.js\n- TypeScript\n- Tailwind\n- Three.js\n- Redux\n- Node.js\n- Express\n- MongoDB`}
       />
 
-      {/* Profile picture wallpaper (right wall) */}
+      {/* Profile picture wallpaper  */}
       <WallFrame3D
-        position={isMobile ? [5.5, 1, -4.9] : [7, 1, -4.9]}
+        position={isMobile ? [roomWidth / 2 - 1.5, 1, -4.9] : [7, 1, -4.9]}
         imageUrl="/me.jpg"
       />
 
       {/* Floor */}
       <mesh rotation-x={-Math.PI / 2} position={[0, -2, 0]} receiveShadow>
-        <planeGeometry args={[20, 20]} />
+        <planeGeometry args={[roomWidth, 20]} />
+        <meshStandardMaterial color="#d9c9b6" roughness={0.8} />
+      </mesh>
+
+      {/* Ceiling */}
+      <mesh rotation-x={Math.PI / 2} position={[0, 4, 0]} receiveShadow>
+        <planeGeometry args={[roomWidth, 20]} />
         <meshStandardMaterial color="#d9c9b6" roughness={0.8} />
       </mesh>
 
       {/* Back wall */}
       <mesh position={[0, 3, -5]} receiveShadow>
+        <planeGeometry args={[roomWidth, 10]} />
+        <meshStandardMaterial color="#f5f0e6" />
+      </mesh>
+
+
+      {/* Left wall */}
+      <mesh rotation-y={Math.PI / 2} position={[-roomWidth / 2, 3, 0]} receiveShadow>
         <planeGeometry args={[20, 10]} />
         <meshStandardMaterial color="#f5f0e6" />
       </mesh>
 
-      {/* Left wall */}
-      <mesh rotation-y={Math.PI / 2} position={[-10, 3, 0]} receiveShadow>
+      {/* ✅ Right wall */}
+      <mesh rotation-y={-Math.PI / 2} position={[roomWidth / 2, 3, 0]} receiveShadow>
         <planeGeometry args={[20, 10]} />
         <meshStandardMaterial color="#f5f0e6" />
       </mesh>
@@ -109,7 +125,11 @@ export default function HomePage() {
       <Environment preset="apartment" />
 
       {/* Controls */}
-      <OrbitControls enablePan={false} minDistance={4} maxDistance={isMobile ? 12 : 10} />
+      <OrbitControls
+        enablePan={false}
+        minDistance={4}
+        maxDistance={isMobile ? 12 : 10}
+      />
     </Canvas>
   );
 }
