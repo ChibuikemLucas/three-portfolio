@@ -32,7 +32,7 @@ My blog:
 👉 [The Developer Experience](https://the-developer-experience.hashnode.dev)  
 
 ## 📸 Preview
-![3D Portfolio Preview](./public/preview.png)
+![3D Portfolio Preview](./public/preview-v2.png)
 
 ## 🚀 Getting Started  
 
