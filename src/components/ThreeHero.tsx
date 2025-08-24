@@ -34,14 +34,14 @@ export default function ThreeHero() {
                     transition={{ delay: 0.1 }}
                 >
                     <a
-                        href="https://github.com/yourname"
+                        href="https://github.com/ChibuikemLucas"
                         target="_blank"
                         className="px-4 py-2 rounded bg-white text-black hover:opacity-90"
                     >
                         GitHub
                     </a>
                     <a
-                        href="https://linkedin.com/in/yourname"
+                        href="https://www.linkedin.com/in/chibuikem-lucas-073355261"
                         target="_blank"
                         className="px-4 py-2 rounded border border-white/30 hover:bg-white/10"
                     >
