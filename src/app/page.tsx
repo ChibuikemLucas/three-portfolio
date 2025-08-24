@@ -39,6 +39,7 @@ export default function HomePage() {
         zIndex: 0,
       }}
     >
+
       {/* Scale whole scene down on mobile */}
       <group scale={isMobile ? 0.9 : 1}>
         {/* Tech stack wallpaper (left wall) */}
@@ -114,6 +115,7 @@ export default function HomePage() {
         minDistance={4}
         maxDistance={isMobile ? 11 : 10} // allow further zoom-out on mobile
       />
+
     </Canvas>
   );
 }
