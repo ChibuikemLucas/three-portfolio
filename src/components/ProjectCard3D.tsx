@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { Text, Html, useTexture } from "@react-three/drei";
+import { Text, useTexture } from "@react-three/drei";
 import { ThreeEvent } from "@react-three/fiber";
 import * as THREE from "three";
 import { Project } from "@/lib/projects";
@@ -56,12 +56,7 @@ export default function ProjectCard3D({ project, position, onOpen }: Props) {
                 {project.title}
             </Text>
 
-            {/* Tags (Html overlay) */}
-            <Html distanceFactor={10} position={[0, -1.1, 0]}>
-                <div className="backdrop-blur bg-white/5 border border-white/10 rounded px-2 py-1 text-xs">
-                    {project.tags.slice(0, 3).join(" • ")}
-                </div>
-            </Html>
+
         </group>
     );
 }

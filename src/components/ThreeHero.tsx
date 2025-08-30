@@ -48,7 +48,7 @@ export default function ThreeHero() {
                         LinkedIn
                     </a>
                     <a
-                        href="/resume.pdf"
+                        href="/Chibuikem-Lucas-Dev-Resume.pdf"
                         target="_blank"
                         className="px-4 py-2 rounded border border-white/30 hover:bg-white/10"
                     >

@@ -93,7 +93,7 @@ export default function HomePage() {
         {/* Social panels */}
         <SocialPanel3D label="GitHub" url="https://github.com/ChibuikemLucas" position={[-2, -0.3, 1]} />
         <SocialPanel3D label="LinkedIn" url="https://www.linkedin.com/in/chibuikem-lucas-073355261" position={[0, -0.3, 1]} />
-        <SocialPanel3D label="Resume" url="/resume.docx" position={[2, -0.3, 1]} />
+        <SocialPanel3D label="Resume" url="/Chibuikem-Lucas-Dev-Resume.pdf" position={[2, -0.3, 1]} />
 
         {/* Blog panel */}
         <BlogPanel3D
