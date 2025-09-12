@@ -10,7 +10,7 @@ export default function Desk3D(props: GroupProps) {
     const [openDrawer, setOpenDrawer] = useState<number | null>(null);
 
     // 3 drawers (left, middle, right)
-    const drawers = [0, 1, 2];
+    const drawers = [0, 1, 2, 3];
 
     return (
         <group {...props}>
@@ -43,15 +43,19 @@ export default function Desk3D(props: GroupProps) {
 
                 const project = projects[d % projects.length];
 
+                // new position logic
+                const x = i === 3 ? -1 : i - 1;
+                const y = i === 3 ? 0.12 : 0.4;
+
                 return (
                     <a.group
                         key={i}
-                        position={[i - 1, 0.4, 0]} // spread drawers
+                        position={[x, y, 0]} // spread drawers
                         onClick={() => setOpenDrawer(isOpen ? null : d)}
                     >
                         {/* Drawer box */}
                         <a.mesh position-z={z}>
-                            <boxGeometry args={[0.8, 0.3, 1.2]} />
+                            <boxGeometry args={[0.8, 0.18, 1.2]} />
                             <meshStandardMaterial color="#5a3c1a" />
                         </a.mesh>
 

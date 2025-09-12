@@ -38,4 +38,13 @@ export const projects: Project[] = [
         href: "https://developer-personal-assistant.vercel.app",
         repo: "",
     },
+    {
+        id: "freelance-crm",
+        title: "Freelance Customer Relationship Management (CRM) App ",
+        description: "For you to stores notes and details of your freelance clients and job applications.",
+        tags: ["Next.js", "Tailwind", "TypeScript", "API", "mui", "Express", "MongoDB", "Redux", "JWT"],
+        image: "/covers/fcrm.png",
+        href: "https://freelance-crm.vercel.app",
+        repo: "",
+    },
 ];
