@@ -45,7 +45,7 @@ export default function Desk3D(props: GroupProps) {
 
                 // new position logic
                 const x = i === 3 ? -1 : i - 1;
-                const y = i === 3 ? 0 : 0.4;
+                const y = i === 3 ? 0.12 : 0.4;
 
                 return (
                     <a.group
@@ -55,7 +55,7 @@ export default function Desk3D(props: GroupProps) {
                     >
                         {/* Drawer box */}
                         <a.mesh position-z={z}>
-                            <boxGeometry args={[0.8, 0.3, 1.2]} />
+                            <boxGeometry args={[0.8, 0.18, 1.2]} />
                             <meshStandardMaterial color="#5a3c1a" />
                         </a.mesh>
 
