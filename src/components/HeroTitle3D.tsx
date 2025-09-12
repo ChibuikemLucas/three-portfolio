@@ -18,6 +18,7 @@ function FloatingName() {
                     anchorY="middle"
                     outlineWidth={0.01}
                     outlineColor="#000"
+                    color="#7c7c7c"
                 >
                     CHIBUIKEM LUCAS
                     <meshStandardMaterial metalness={0.2} roughness={0.25} />
@@ -29,10 +30,11 @@ function FloatingName() {
                     fontSize={0.28}
                     anchorX="center"
                     anchorY="middle"
-                    color="#cfcfcf"
+                    outlineColor="#000"
+                    color="#676767"
                 >
-                    Frontend Developer
-                    <meshStandardMaterial metalness={0.15} roughness={0.6} />
+                    Full-Stack Developer
+                    <meshStandardMaterial metalness={0.5} roughness={0.2} />
                 </Text>
             </Float>
         </group>
